@@ -1,23 +1,21 @@
-import { render, screen, fireEvent } from "@testing-library/react";
-import Like from "../Like"; 
+import { render, screen, fireEvent } from '@testing-library/react';
+import Like from '../Like';
 
-describe("Like component", () => {
-  test('muestra por defecto el valor "Likes: 0"', () => {
+describe('Like component', () => {
+  test('muestra "Likes: 0" por defecto', () => {
     render(<Like />);
-    expect(screen.getByText(/Likes: 0/i)).toBeInTheDocument();
+    expect(screen.getByText('Likes: 0')).toBeInTheDocument();
   });
 
-  test("incrementa el número de likes al hacer clic en el botón Like", () => {
+  test('incrementa likes al hacer clic en Like', () => {
     render(<Like />);
-    const likeButton = screen.getByRole("button", { name: /Like/i });
-    fireEvent.click(likeButton);
-    expect(screen.getByText(/Likes: 1/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Like')); // Selección exacta por texto
+    expect(screen.getByText('Likes: 1')).toBeInTheDocument();
   });
 
-  test("decrementa el número de likes al hacer clic en el botón Dislike", () => {
+  test('decrementa likes al hacer clic en Dislike', () => {
     render(<Like />);
-    const dislikeButton = screen.getByRole("button", { name: /Dislike/i });
-    fireEvent.click(dislikeButton);
-    expect(screen.getByText(/Likes: -1/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByText('Dislike')); // Selección exacta por texto
+    expect(screen.getByText('Likes: -1')).toBeInTheDocument();
   });
 });
